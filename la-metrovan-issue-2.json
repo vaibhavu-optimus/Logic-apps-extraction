@@ -1,0 +1,9 @@
+{
+  "parameters": {
+    "$connections": {
+      "type": "Object",
+      "value": null
+    }
+  },
+  "definition": null
+}

@@ -23,7 +23,20 @@ else {
   }
 }
 
-$_ = Connect-AzAccount -Tenant $tenantId -Subscription $subscriptionId
+# $_ = Connect-AzAccount -Tenant $tenantId -Subscription $subscriptionId
+
+
+try {
+    Connect-AzAccount -Tenant $tenantId -ErrorAction Stop
+
+    Set-AzContext -SubscriptionId $subscriptionId -ErrorAction Stop
+
+    Write-Host "Connected to subscription: $subscriptionId"
+}
+catch {
+    Write-Error "Azure login/context setup failed: $_"
+    exit 1
+}
 
 $logicApps = Get-AzLogicapp -ResourceGroupName $resourceGroupName
 
